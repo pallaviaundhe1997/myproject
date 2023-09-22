@@ -1,0 +1,298 @@
+Que1.Who will perepare requirement document?
+Ans:This requirement document called as IDD-Initial Design Document
+and Bigdata Architech prepare this requirement document
+
+
+Que2.Who will perepare Scopping document?
+Ans: Business Analyst will create this scopping document
+based on this scoppping document dev/test team need to work
+Scopping document = Derivation sheet
+
+Que3.Who will give the requirement in your project?
+Ans:Business Analyst give the requirement in our project
+
+Que4.Who will put the code into the production environment?
+Ans:There will be the dedicate team will get only access of this prod cluster
+developer will not get the direct access
+
+Que5.In which domain your project was?
+Ans:Our project is in Telecom domain
+
+Que6.What was your team size?
+Ans:Total 9
+ Mgr-1
+ TL/ Scrum Master – 1
+ HE/Dev – 2
+ MidE/Dev-4
+ Fresher-1
+
+Que7.Have you providing a support for your project?
+Ans:Yes,there will be the one tool or we can says the application ALM-Application Lifecycle Management
+in this ALM application,issue will get raise and dev team work on the issue
+
+Que8.What type of support you are providing?
+Ans:If any issue getting in the UAT & production 
+those we are fixes the issue and we need to provide support
+
+
+Que9.What was your project duration?
+Ans:Development - 1.5-2 year
+	Support – 6 months
+
+Que10.What is role of Data Engineer?
+Ans:Our role is gathered data or take the data from multiple sources,transform it
+and put into the datawarehouse,analyze it and create the report
+
+Que11.What is difference between customer and subscriber?
+Ans:Customer-one time buyer
+Subscriber-generating revenue continuously
+
+Que12.What was your project goal?
+or
+What was main intention to analyze the data
+Ans:our main purpose to analyze the data is
+revenue generation anaysis
+
+Que13.Which tool you have used in your project?
+ans:
+Tools Used with Versions : 
+1. RDS–Postgre PostgreSQL 12.5-R1
+2. EMR-5.33
+3. Spark-2.4.7
+4. Python-3.1.2
+5. Hadoop-2.10.1
+6. Hive-2.3.7
+7. Hbase-1.4
+8. Phoenix-phoenix-4.14.3
+9. S3-NA
+10.Linux-NA
+11.Airflow-2.0
+12.Workbench-Build 127
+13.Java-1.8.0_282
+
+Que14.What was your project cluster configuration?
+Ans:Cluster Details:-
+Total Number of nodes: 9
+Masters: 3 (ANN,PNN,RM)
+Slaves: 6
+Total RAM: 256 GB * 6 ~= 1.35 TB
+HDFS Size ~= 120 TB (100 TB Process)
+Total Cores= 64 * 6 = 350 cores
+Cluster retention: 1 year
+Replication Factor: 3
+Block Size: 128 MB
+Data in Depth:
+Daily Data Size: ~200 GB
+Input File Type: .csv
+Delimiter: | 
+Daily 1 file for each transactional Table.
+Total Number of tables: ~300 : (220 TX , 60 REF , 20 Hist.)
+Total Number of Jobs: Around 340 jobs
+
+Que15.Which type of data processing you have used in your project
+Ans:We have used Batch Processing in our project
+
+Que16.What is the main reason to load data into L1 layer in your project?
+Ans:We no need to take data again and again from outside the cluster because
+we are importing data from RDS and RDS is outside of our cluster network
+
+Que17.In your project you are processing historic data on daily basis?
+Ans:No,because there can be the time consumption and resource utilization will more
+that why's we are not processing historic data again and again
+Historic data processing is one time load
+we should process Delta data/daily data on daily basis
+
+Que18.How you are capturing Delta data?
+Ans:New insert,update,delete that data we will get in the form of file
+
+Que19.Who will send this Delta data file?
+Ans:Source team will send file in our source location
+this source team capture the incremental/daily/delta file
+and share those file into S3 Bucket
+
+Que20.Why you are using S3 bucket as target in your project?
+Ans:We are generating reports in files and 
+those files can access other teams 
+
+Que21.Why stagging is required?
+Ans:Stagging is required because if any application access data from stagging layer
+it will impact on that application
+stagging layer always truncate and load
+
+Que22.Why you are keeping daily data into the stagging layer?
+Ans:We can't write data into final layer because
+if we write data directly into hive final layer instead of hive stagging layer
+then we will get the duplicate records in final layer
+
+Que23.Why you have got one file in S3 bucket
+Ans:We have used coalease in our script
+coalease will be reduce the number of partition to one
+no. of partition = no. of output file
+
+Que24.How you debug the failed job?
+Ans:$ yarn logs -applicationID applicationIDno
+we use this command for checking logs 
+it will print all the logs
+
+Que25.Which command used for storing the log in file
+Ans:$ yarn logs applicationID applicationIDno >> app.log
+we can use redirectional operator for storing
+we use this command for storing the log in file
+
+Que26.How to identify any error in log?
+Ans:$ yarn logs -applicationID applicationIDno | grep -i error
+we use this command for identify any error in log
+
+Que27.How to check any job is running or failed?
+Ans: $ yarn application -status applicationIDno
+we use this command for checking status of any job
+
+Que28.How to terminate any job?
+Ans:$ yarn application -kill applicationIDno
+we use this command for terminate any job
+
+Que29.How to list of job which are running
+Ans:$ yarn application -list
+
+Que30.Where you can checking log if any job got failed?
+Ans:we can check on 
+1.Terminal- $ yarn logs -applicationID applicationIDno | grep -i error
+2.GUI- either on Application Manager:YARN or Spark History Server: Spark
+
+Que31.What is the port no. of Application Manager or  Spark History Server?
+Ans:Application Manager=8088
+Spark History Server=18080
+
+Que32.What are the different issue you have faced while implimenting this project & how to resolve it?
+Ans:1.File or dir not exsit (while importing data)
+2.Table not found exception
+first we need to create the table then we will able to write the data
+3.Permission denied
+if we try to connect database through spark job but we don't have permission to connect
+and password is incorrect then we can get error
+4.Timeout Exception
+whenever we are trying to connect database i.e Hbase,Hive due to any reason like
+server is down
+5.Driver memory insufficient
+6.Executor memory insufficient
+
+Que33.What are the optimization technic you have used in your project?
+Ans:
+Spark
+Code level optimization-
+Broadcast join (while joining table size is small)
+Coalease
+Repartition
+Persist
+Cache
+Catalysist optimizer
+File format Parquet (Parquet is more faster in the spark)
+
+Execution level optimization-
+True some parameter
+Driver memory
+Executor memory
+No. of executor
+Shuffle partition
+
+Que34.How you have done validation/reconsilation in your project?
+Ans:1.Count check
+2.Null check
+3.Duplicate check
+4.RI check (Refferal Intregrity)
+5.Detailed validation
+6.Schema validation
+
+Que35.How to log in phoenix terminal?
+Ans:$ /usr/lib/phoenix/bin/sqlline.py localhost
+by using this command we can log in phoenix terminal
+
+Que36.Which command use for import data from RDS to Hbase?
+Ans:we required postgre,hbase,phoenix jar for importing data from RDS to Hbase
+$ spark-submit --jars postgresql.jar,HBase.jar,phoenix.jar --master yarn --deploy-mode client --driver-memory  --executor-memory  --num-executors  --executor-cores  file_name.py
+
+Que37.How to run .hql script from hadoop?
+Ans:$ hive -f file_name.hql
+by using this command we can run hive query from hadoop
+
+Que38.Which command use for import data from Hbase to Hive?
+Ans:we required only Hbase & Phoenix jar for importing data from Hbase to Hive and also enableHivesupport
+$ spark-submit --jars HBase.jar,phoenix.jar --master yarn --deploy-mode client --driver-memory --executor-memory --num-executors  --executor-cores  file_name.py
+
+Que39.Which command use for import data from Hive_stagging to Hive_final?
+ANS:we no need to provide any jar dependency
+$ /usr/bin/spark-submit --master yarn --deploy-mode client --driver-memory --executor-memory --num-executors --executor-cores file_name.py
+
+Que40.Write a Pyspark program for importing data from RDS to Hbase?
+Ans:from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName("RDStoHBASE_Ref_Table").master("yarn").getOrCreate()
+
+host="jdbc:postgresql://database-1.cuqahmcd1hmu.ap-south-1.rds.amazonaws.com:5432/dev"
+user="myuser"
+pwd="mypassword"
+driver="org.postgresql.Driver"
+
+print("Data import for reference table is started....")
+
+#Country Table
+df_cn=spark.read.format("jdbc").option("url",host).option("user",user).option("password",pwd).option("driver",driver).option("dbtable","COUNTRY").load()
+df_cn.write.format("org.apache.phoenix.spark").option("table","COUNTRY_HB").option("zkUrl","localhost:2181").mode('overwrite').save()
+
+print("Country Table Imported successfully")
+
+spark.stop()
+
+Que41.Difference betweeen OLAP & OLTP?
+Ans:
+OLAP
+Online Analytical Processing
+eg.Hbase,Hive
+for Analysis purpose
+
+OLTP
+Online Transactional Processing
+eg.Mysql,Oracle
+for Transactional
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
