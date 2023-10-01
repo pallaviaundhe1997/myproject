@@ -1,0 +1,205 @@
+1.Project flow 
+2.Tools along with Version
+3.remove duplicate
+4.handle delta
+5.project goal / KPI
+6.role and responsibilities 
+7.deployment
+8.project code 
+9.Team 
+10. challenges you faced 
+
+
+=================================
+#optimization technique in project 
+code level
+spark
+repartition
+coalesce
+broadcast join
+persist
+cache
+
+hive
+broadcast join 
+partition
+bucketing
+vectorization
+
+
+execution level 
+exe memory
+driver memory 
+ex / driver core 
+no of executior
+dynamic resourse allocation.
+
+====================================================
+#ETL tool in project 
+
+Spark 
+
+Spark extract transform Load
+=-============================
+yes 1.5 2 projects  4 
+
+banking domain , telecom 
+
+telecom 
+
+=======================================
+#how to visulize the data 
+powerBI , Quicksight , micorstrategy , Tebelue
+
+Data Analyst
+
+==========================================
+#how to decide which optimization tech use in project ?
+#hive 
+
+taking more 
+
+cust  large   city 
+
+============================================
+
+Role & Responsibilities ? 
+
+undestand requirement 
+develope solution
+to write spark code 
+to write hql 
+automation shell script
+airflow
+unit testing 
+deploy code in  higher env 
+bug fix 
+documentation 
+mentor KT 
+============================
+Data security: 
+
+script : 
+never hardcode any value 
+hardcode password 
+keep code 777 400 700
+
+hive 
+
+script 
+
+=================================
+jar  : code 
+dependency 
+
+T1 ----> T2 
+jar ---> read DBMS jar 
+
+================================
+Broadcast join 
+
+t1 t2 
+
+
+select   /*MAPJOIN(dept)
+===============================
+
+Requirement :
+initial requirement 
+
+Goal :
+revenue
+actuve cust 
+cn total sub 
+
+========================================
+GPU
+
+row data layer L1
+
+transform layer  L2
+
+consumer layer reporting 
+====================================
+Fact  table Diamestion 
+
+Delta 
+
+================================
+task1 >>  task2
+
+
+[task1,tas2]
+
+=============================
+data dedup and complex transformation 
+
+doubt       int 
+SCD type 2
+
+revenue  :  10-12 
+
+==============================
+hive over athena or redshift
+
+
+EMR : Analysi \
+Hive : free DWH Analysis
+Athena : paid 
+Redshift : paid 
+
+RDS  spark   Redshift 
+RDS  spark   S3    Athena
+
+=================================================
+spark local   cluster(yarn,mesos)
+
+yarn  :
+
+local  :  
+
+=================================
+Tool to create report 
+
+Hive --> Spark --> transform ---> S3 
+
+===================================================
+CMPA -------> CMPB
+
+6 M 
+
+dev 
+
+===================
+store project data 
+
+RAM  :
+core :
+HDD : 
+
+====================
+report 
+query
+
+==================
+hist only once 
+
+delta ----> 1 day 
+
+12:30 --->                          4:00 AM 
+
+====================================================
+spark  : 20- 30 
+project : 20-30
+sql : 20 :
+python : 10 % 
+===============================
+
+EMR  24*7   12:30 4 AM  (DWH)
+stepwise execution EMR : job --> EMR ---> execute --> terminate
+glue 
+src --> process ---> tgt 
+src ---> databricks --> tgt 
+         cluster
+
+==============================================================================		 
